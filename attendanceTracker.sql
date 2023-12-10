@@ -32,3 +32,42 @@ INSERT INTO course VALUES
 (1249732, 'Nancy Y', 'CSCI 385-M01', 'Present: 17 Late: 3 Absence: 0'),
 (1234783, 'Sophia Z', 'CSCI 352-M01', 'Present: 20 Late: 0 Absence: 0'),
 (1247836, 'Tina Z', 'CSCI 385-M01', 'Present: 20 Late: 0 Absence: 0');
+
+CREATE TABLE professor (
+    professor_id 		INT 			PRIMARY KEY,
+    professor_Name 		VARCHAR(50) 	NOT NULL,
+    professor_email		VARCHAR(100)	NOT NULL
+);
+INSERT INTO professor VALUES
+(1290019, 'Keshawn', 'kmoses01@nyit.edu');
+
+CREATE TABLE admin (
+    admin_id 			INT 			PRIMARY KEY,
+    admin_name 			VARCHAR(50) 	NOT NULL,
+    admin_email			VARCHAR(100)	NOT NULL
+);
+INSERT INTO admin VALUES
+(1234567, 'Beza', 'bnigatu@nyit.edu'),
+(1345678, 'Kristen', 'jzhuo01@nyit.edu');
+
+CREATE TABLE course (
+    course_id 		INT 			PRIMARY KEY,
+    course_Name 	VARCHAR(100) 	NOT NULL
+);
+INSERT INTO course VALUES
+(380, 'Introduction to Software Engineering');
+
+CREATE TABLE enrollment_Info (
+    student_id 		INT,
+    professor_id 	INT,
+    course_id		INT,
+    role 			VARCHAR(10),
+    FOREIGN KEY (student_id) REFERENCES student(student_id),
+    FOREIGN KEY (professor_id) REFERENCES professor(professor_id),
+    FOREIGN KEY (course_id) REFERENCES course(course_id)
+);
+
+INSERT INTO enrollment_Info VALUES
+(1249732, NULL, 380, 'student'),
+(1247836, NULL, 380, 'student'),
+(NULL, 1290019, 380, 'teacher');

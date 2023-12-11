@@ -1,0 +1,36 @@
+CREATE DATABASE attendanceTracker;
+
+USE attendanceTracker;
+
+CREATE TABLE attendance
+(
+    student_Id              INT          UNIQUE,
+    student_Name            CHAR(30),
+    course                  CHAR(30),
+    present_count           INT,
+    late_count              INT,
+    absence_count           INT,
+    PRIMARY KEY (student_Id)
+);
+
+INSERT INTO attendance VALUES
+(1702734, 'Ashley A', 'ITEC 310-M01', 20, 0, 0),
+(1237946, 'Bette B', 'CSCI 352-M01', 20, 0, 0),
+(1431686, 'Robert Cao', 'CSCI 385-M01', 19, 1, 0),
+(1278946, 'John C', 'CSCI 352-M01', 17, 0, 3),
+(1474873, 'Jack C', 'CSCI 352-M01', 18, 1, 1),
+(1363776, 'Shirley D', 'ITEC 310-M01', 20, 0, 0),
+(1164376, 'Dean D', 'CSCI 385-M01', 18, 0, 2),
+(1097966, 'Earl Gu', 'ITEC 310-M01', 20, 0, 0),
+(1245636, 'Kate G', 'ITEC 310-M01', 19, 1, 0),
+(1465673, 'Joyce Li', 'CSCI 352-M01', 20, 0, 0),
+(1264642, 'David Lu', 'CSCI 352-M01', 20, 0, 0),
+(1270392, 'Carl M', 'CSCI 352-M01', 16, 2, 2),
+(1213346, 'Ivy S', 'CSCI 385-M01', 20, 0, 0),
+(1013429, 'William Smith', 'CSCI 385-M01', 15, 0, 5),
+(1134498, 'Matthew T', 'CSCI 352-M01', 20, 0, 0),
+(1134290, 'Jenny V', 'ITEC 310-M01', 15, 0, 5),
+(1134873, 'Chris W', 'ITEC 310-M01', 20, 0, 0),
+(1249732, 'Nancy Y', 'CSCI 385-M01', 17, 3, 0),
+(1234783, 'Sophia Z', 'CSCI 352-M01', 20, 0, 0),
+(1247836, 'Tina Z', 'CSCI 385-M01', 20, 0, 0);

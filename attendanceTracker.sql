@@ -10,7 +10,14 @@ CREATE TABLE attendance
     attendance_status       CHAR(25),
     PRIMARY KEY (student_Id)
 );
-
+CREATE TABLE course
+(
+    student_Id              INT          UNIQUE,
+    student_Name            CHAR(30),
+    course                  CHAR(30),
+    attendance_status       CHAR(25),
+    PRIMARY KEY (student_Id)
+);
 INSERT INTO course VALUES
 (1702734, 'Ashley A', 'ITEC 310-M01', 'Present: 20 Late: 0 Absence: 0'),
 (1237946, 'Bette B', 'CSCI 352-M01', 'Present: 20 Late: 0 Absence: 0'),

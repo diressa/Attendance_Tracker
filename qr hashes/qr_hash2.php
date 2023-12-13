@@ -18,7 +18,7 @@ if(isset($_POST['login'])){//click login button
     $sql = "SELECT * FROM student WHERE student_id = '$student_id';
             UPDATE student SET present = present + 1 WHERE student_id = '$student_id';";
 
-    if(($conn->multi_query($sql) == TRUE) && (($id_hash - 2) == 0)){
+    if(($conn->multi_query($sql) == TRUE) && ($id_hash == 2)){
       //  login in successful (exists and correct qr code)
       do{
         if($result = $conn->store_result()){

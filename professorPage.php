@@ -135,10 +135,10 @@ $course_stmt->execute();
             </thead>
             <tbody>
             <?php
-                while ($course_result = $course_stmt->fetch(PDO::FETCH_ASSOC)) {
+            while ($course_result = $course_stmt->fetch(PDO::FETCH_ASSOC)) {
                 $course_id = $course_result['course_id'];
                 $course_name = $course_result['course_Name'];
-            ?>
+                ?>
                 <tr>
                     <td><?php echo $course_id; ?></td>
                     <td><?php echo $course_name; ?></td>
@@ -148,12 +148,12 @@ $course_stmt->execute();
                         <!-- This is where the QR code will be displayed -->
                         <div id="qrcode_<?php echo $course_id; ?>"></div>
                     </td>
-                    <td><a href="reportPage.php?course_id=<?php echo $course_id; ?>">Status</a></td>
+                    <td><a href="reportPage.php?course_id=<?php echo $course_id; ?>">Absence Status</a></td>
                     <td><a href="attendance_status.php?course_id=<?php echo $course_id; ?>">Generate Report</a></td>
 
                 </tr>
-                    <?php
-                }
+                <?php
+            }
             ?>
             </tbody>
         </table>
@@ -177,7 +177,6 @@ $course_stmt->execute();
         $("idCalendarNext").onclick = function(){ cale.NextMonth(); }
 
     </SCRIPT>
-    <!-- ... existing code ... -->
 
     <script language="JavaScript">
         function generateQRCode(courseId, courseName) {
@@ -200,9 +199,9 @@ $course_stmt->execute();
 
         // Function to generate a unique identifier
         function generateUniqueIdentifier() {
-
             return Date.now().toString();
         }
     </script>
     <div style="width:100%;height:1px;" class="clear"></div>
 </body>
+</html>

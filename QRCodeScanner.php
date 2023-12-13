@@ -1,45 +1,21 @@
 <?php
 session_start();
 $conn = new PDO("mysql:dbname=attendanceTracker;host=localhost;port=3307", 'root', 'root');
-$admin_id = $_SESSION['admin_id'];
-
-// ... (your existing code fetching admin information)
 
 // Retrieve student ID for the current session
 $student_id = $_SESSION['student_id'];
+$course_id = $_SESSION['course_id'];
 
-// Fetch all students
-$stmt_students = $conn->prepare("SELECT student_id, student_Name, student_email FROM student");
-$stmt_students->execute();
-$students = $stmt_students->fetchAll(PDO::FETCH_ASSOC);
+// Function to generate and store a random number in the session
+function generateAndStoreRandomNumber() {
+    $randomNumber = rand(1000, 9999);
+    $_SESSION['random_number'] = $randomNumber;
+    return $randomNumber;
+}
 
-// Fetch all teachers
-$stmt_teachers = $conn->prepare("SELECT professor_id, professor_Name, professor_email FROM professor");
-$stmt_teachers->execute();
-$teachers = $stmt_teachers->fetchAll(PDO::FETCH_ASSOC);
+// Call the function to generate and store the random number
+$randomNumber = generateAndStoreRandomNumber();
 
-// Fetch all courses
-$stmt_courses = $conn->prepare("SELECT course_id, course_Name FROM course");
-$stmt_courses->execute();
-$courses = $stmt_courses->fetchAll(PDO::FETCH_ASSOC);
-
-// Fetch enrollment info
-$stmt_enrollment = $conn->prepare("SELECT 
-                                    CASE
-                                        WHEN s.student_id IS NOT NULL THEN s.student_Name
-                                        WHEN p.professor_id IS NOT NULL THEN p.professor_Name
-                                        ELSE 'Unknown'
-                                    END AS Name,
-                                    c.course_id AS CourseID,
-                                    c.course_Name AS Course,
-                                    e.role
-                                   FROM enrollment_Info e
-                                   LEFT JOIN student s ON e.student_id = s.student_id
-                                   LEFT JOIN professor p ON e.professor_id = p.professor_id
-                                   JOIN course c ON e.course_id = c.course_id
-                                   ORDER BY c.course_id");
-$stmt_enrollment->execute();
-$enrollments = $stmt_enrollment->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <html>
@@ -83,14 +59,25 @@ $enrollments = $stmt_enrollment->fetchAll(PDO::FETCH_ASSOC);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log("Student ID: " + <?php echo json_encode($student_id); ?>);
+                    console.log("Course ID: " + <?php echo json_encode($course_id); ?>);
+                    console.log("Random Number: " + <?php echo json_encode($randomNumber); ?>);
+                    console.log("URL Parameters: " + urlParams.toString());
                     alert("Attendance recorded successfully!");
                 }
             };
+
             // Get the course_id from the URL parameter
             var urlParams = new URLSearchParams(window.location.search);
             var course_id = urlParams.get('course_id');
 
-            xhr.send(`student_id=<?php echo json_encode($student_id); ?>&course_id=${course_id}`);
+            // Get the course_id from the URL parameter
+            var urlParams = new URLSearchParams(window.location.search);
+            var course_id = urlParams.get('course_id');
+
+            // Include the random number in the QR code content
+            var random_number = <?php echo $randomNumber; ?>;
+            xhr.send(`student_id=<?php echo json_encode($student_id); ?>&course_id=${course_id}&random_number=${random_number}`);
         }
 
         let htmlscanner = new Html5QrcodeScanner(
@@ -101,5 +88,4 @@ $enrollments = $stmt_enrollment->fetchAll(PDO::FETCH_ASSOC);
     });
 </script>
 </body>
-
 </html>

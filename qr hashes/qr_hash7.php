@@ -12,7 +12,7 @@ if(isset($_POST['login'])){//click login button
             UPDATE student SET present = present + 1 WHERE student_id = '$student_id';";
 
 
-    if(($conn->multi_query($sql) == TRUE) && (($id_hash - 7) == 0)){
+    if(($conn->multi_query($sql) == TRUE) && ($id_hash == 7)){
       //  login in successful (exists and correct qr code)
       do{
         if($result = $conn->store_result()){
@@ -20,7 +20,7 @@ if(isset($_POST['login'])){//click login button
         }
       } while ($conn -> next_result());
 
-        echo "You have been marked present, " . $student_id;
+        echo "You have been marked present, " . $student_id. ".<br> Return to homepage.";
     }else{
         echo "Invalid ID, Please try again or scan the correct QR Code";
     }

@@ -8,7 +8,7 @@ if(isset($_POST['login'])){//click login button
     $student_id = $_POST['student_id'];
     $id_hash = $student_id % 10;
 
-    $sql = "SELECT * FROM student WHERE student_id = '$student_id';
+    $sql = "SELECT * FROM student WHERE student_id = '$student_id'. ".<br> Return to homepage.";
             UPDATE student SET present = present + 1 WHERE student_id = '$student_id';";
 
 

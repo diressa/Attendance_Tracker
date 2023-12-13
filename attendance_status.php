@@ -6,34 +6,15 @@ $conn = new PDO("mysql:dbname=attendanceTracker;host=localhost;port=3307", 'root
 $course_id = $_GET['course_id'];
 
 // Fetch students with more than five absences for the selected course
-$report_stmt = $conn->prepare("SELECT s.student_id, s.student_Name, s.absence, s.present
+$report_stmt = $conn->prepare("SELECT s.student_id, s.student_Name, s.absence, s.present, a.attendance_id, a.timestamp
                                FROM student s
                                JOIN enrollment_info e ON s.student_id = e.student_id
+                               LEFT JOIN attendance a ON s.student_id = a.student_id AND e.course_id = a.course_id
                                WHERE e.course_id = :course_id");
 $report_stmt->bindParam(":course_id", $course_id);
 $report_stmt->execute();
 ?>
-<?php
-while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo "<tr>";
-    echo "<td>" . $report_result['student_id'] . "</td>";
-    echo "<td>" . $report_result['student_Name'] . "</td>";
-    echo "<td>" . $report_result['present'] . "</td>";
-    echo "<td>" . $report_result['absence'] . "</td>";
-    echo "</tr>";
-}
 
-// Reset the pointer to the beginning of the result set for the second table
-$report_stmt->execute();
-
-while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo "<tr>";
-    echo "<td>" . $report_result['attendance_id'] . "</td>";
-    echo "<td>" . $report_result['student_id'] . "</td>";
-    echo "<td>" . $report_result['timestamp'] . "</td>";
-    echo "</tr>";
-}
-?>
 <html>
 <head>
     <title>Attendance Report</title>
@@ -62,6 +43,7 @@ while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
     ?>
     </tbody>
 </table>
+
 <table border="1">
     <thead>
     <tr>
@@ -72,6 +54,9 @@ while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
     </thead>
     <tbody>
     <?php
+    // Reset the pointer to the beginning of the result set
+    $report_stmt->execute();
+
     while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
         echo "<td>" . $report_result['attendance_id'] . "</td>";

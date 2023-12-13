@@ -13,7 +13,27 @@ $report_stmt = $conn->prepare("SELECT s.student_id, s.student_Name, s.absence, s
 $report_stmt->bindParam(":course_id", $course_id);
 $report_stmt->execute();
 ?>
+<?php
+while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "<tr>";
+    echo "<td>" . $report_result['student_id'] . "</td>";
+    echo "<td>" . $report_result['student_Name'] . "</td>";
+    echo "<td>" . $report_result['present'] . "</td>";
+    echo "<td>" . $report_result['absence'] . "</td>";
+    echo "</tr>";
+}
 
+// Reset the pointer to the beginning of the result set for the second table
+$report_stmt->execute();
+
+while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "<tr>";
+    echo "<td>" . $report_result['attendance_id'] . "</td>";
+    echo "<td>" . $report_result['student_id'] . "</td>";
+    echo "<td>" . $report_result['timestamp'] . "</td>";
+    echo "</tr>";
+}
+?>
 <html>
 <head>
     <title>Attendance Report</title>

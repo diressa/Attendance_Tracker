@@ -42,5 +42,25 @@ $report_stmt->execute();
     ?>
     </tbody>
 </table>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Attendance Id</th>
+        <th>Student Id</th>
+        <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    while ($report_result = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>";
+        echo "<td>" . $report_result['attendance_id'] . "</td>";
+        echo "<td>" . $report_result['student_id'] . "</td>";
+        echo "<td>" . $report_result['timestamp'] . "</td>";
+        echo "</tr>";
+    }
+    ?>
+    </tbody>
+</table>
 </body>
 </html>

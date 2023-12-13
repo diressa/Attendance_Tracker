@@ -129,7 +129,8 @@ $course_stmt->execute();
                 <th>Course ID</th>
                 <th>Class Name</th>
                 <th>Start class</th>
-                <th>Report</th>
+                <th>Absence Report</th>
+                <th>Status Report</th>
             </tr>
             </thead>
             <tbody>
@@ -147,7 +148,9 @@ $course_stmt->execute();
                         <!-- This is where the QR code will be displayed -->
                         <div id="qrcode_<?php echo $course_id; ?>"></div>
                     </td>
-                    <td><a href="reportPage.php?course_id=<?php echo $course_id; ?>">Generate Report</a></td>
+                    <td><a href="reportPage.php?course_id=<?php echo $course_id; ?>">Status</a></td>
+                    <td><a href="attendance_status.php?course_id=<?php echo $course_id; ?>">Generate Report</a></td>
+
                 </tr>
                     <?php
                 }
@@ -195,10 +198,9 @@ $course_stmt->execute();
             });
         }
 
-        // Function to generate a unique identifier (you may need to implement this based on your requirements)
+        // Function to generate a unique identifier
         function generateUniqueIdentifier() {
-            // Implement your logic to generate a unique identifier (e.g., timestamp or random string)
-            // For simplicity, using the current timestamp in this example
+
             return Date.now().toString();
         }
     </script>

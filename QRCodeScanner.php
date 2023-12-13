@@ -86,7 +86,11 @@ $enrollments = $stmt_enrollment->fetchAll(PDO::FETCH_ASSOC);
                     alert("Attendance recorded successfully!");
                 }
             };
-            xhr.send(`student_id=${<?php echo json_encode($student_id); ?>}&course_id=${course_id}`);
+            // Get the course_id from the URL parameter
+            var urlParams = new URLSearchParams(window.location.search);
+            var course_id = urlParams.get('course_id');
+
+            xhr.send(`student_id=<?php echo json_encode($student_id); ?>&course_id=${course_id}`);
         }
 
         let htmlscanner = new Html5QrcodeScanner(

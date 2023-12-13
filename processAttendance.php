@@ -4,7 +4,7 @@ $conn = new PDO("mysql:dbname=attendanceTracker;host=localhost;port=3307", 'root
 
 // Get student and course ID from the session or any other source
 $studentId = $_SESSION['student_id'];
-$courseId = $_POST['course_id'];  // Updated to get course_id from the POST data
+$courseId = $_GET['course_id'];
 
 // Check if the attendance record already exists
 $stmtCheck = $conn->prepare("SELECT * FROM attendance WHERE student_id = :student_id AND course_id = :course_id");

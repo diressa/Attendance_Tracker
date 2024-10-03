@@ -129,31 +129,28 @@ $course_stmt->execute();
                 <th>Course ID</th>
                 <th>Class Name</th>
                 <th>Start class</th>
-                <th>Absence Report</th>
-                <th>Status Report</th>
+                <th>Report</th>
             </tr>
             </thead>
             <tbody>
             <?php
-            while ($course_result = $course_stmt->fetch(PDO::FETCH_ASSOC)) {
+                while ($course_result = $course_stmt->fetch(PDO::FETCH_ASSOC)) {
                 $course_id = $course_result['course_id'];
                 $course_name = $course_result['course_Name'];
-                ?>
+            ?>
                 <tr>
                     <td><?php echo $course_id; ?></td>
                     <td><?php echo $course_name; ?></td>
                     <td>
                         <!-- Add a button to trigger the QR code generation -->
-                        <button onclick="generateQRCode('<?php echo $course_id; ?>', '<?php echo $course_name; ?>')">Generate QR Code</button>
+                      <button onclick="generateQRCode('<?php echo $course_id; ?>', '<?php echo $course_name; ?>')">Generate QR Code</button>
                         <!-- This is where the QR code will be displayed -->
                         <div id="qrcode_<?php echo $course_id; ?>"></div>
                     </td>
-                    <td><a href="reportPage.php?course_id=<?php echo $course_id; ?>">Absence Status</a></td>
-                    <td><a href="attendance_status.php?course_id=<?php echo $course_id; ?>">Generate Report</a></td>
-
+                    <td><a href="reportPage.php?course_id=<?php echo $course_id; ?>">Generate Report</a></td>
                 </tr>
-                <?php
-            }
+                    <?php
+                }
             ?>
             </tbody>
         </table>
@@ -177,6 +174,7 @@ $course_stmt->execute();
         $("idCalendarNext").onclick = function(){ cale.NextMonth(); }
 
     </SCRIPT>
+    <!-- ... existing code ... -->
 
     <script language="JavaScript">
         function generateQRCode(courseId, courseName) {
@@ -187,21 +185,74 @@ $course_stmt->execute();
             qrcodeContainer.innerHTML = '';
 
             // Construct the QR code content (courseId, courseName, and a unique identifier)
-            var qrCodeContent = courseId + '|' + courseName + '|' + generateUniqueIdentifier();
+            var qrCodeContent0 = "qr_hash0.php"; var qrCodeContent1 = "qr_hash1.php";
+            var qrCodeContent2 = "qr_hash2.php"; var qrCodeContent3 = "qr_hash3.php";
+            var qrCodeContent4 = "qr_hash4.php"; var qrCodeContent5 = "qr_hash5.php";
+            var qrCodeContent6 = "qr_hash6.php"; var qrCodeContent7 = "qr_hash7.php";
+            var qrCodeContent8 = "qr_hash8.php"; var qrCodeContent9 = "qr_hash9.php";
 
             // Create a new instance of QRCode
-            var qrcode = new QRCode(qrcodeContainer, {
-                text: qrCodeContent,
+            var qrcode0 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent0,
+                width: 128,
+                height: 128
+            });
+            var qrcode1 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent1,
+                width: 128,
+                height: 128
+            });
+            var qrcode2 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent2,
+                width: 128,
+                height: 128
+            });
+            var qrcode3 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent3,
+                width: 128,
+                height: 128
+            });
+            var qrcode4 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent4,
+                width: 128,
+                height: 128
+            });
+            var qrcode5 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent5,
+                width: 128,
+                height: 128
+            });
+            var qrcode6 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent6,
+                width: 128,
+                height: 128
+            });
+            var qrcode7 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent7,
+                width: 128,
+                height: 128
+            });
+            var qrcode8 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent8,
+                width: 128,
+                height: 128
+            });
+            var qrcode9 = new QRCode(qrcodeContainer, {
+                text: qrCodeContent9,
                 width: 128,
                 height: 128
             });
         }
 
-        // Function to generate a unique identifier
+
+
+        // Function to generate a unique identifier (you may need to implement this based on your requirements)
         function generateUniqueIdentifier() {
+            // Implement your logic to generate a unique identifier (e.g., timestamp or random string)
+            // For simplicity, using the current timestamp in this example
             return Date.now().toString();
         }
     </script>
-    <div style="width:100%;height:1px;" class="clear"></div>
+    <div style="width:100%;height:1px;" class="clear"
+    ></div>
 </body>
-</html>
